@@ -4,7 +4,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-
+.env
 # Icon must end with two \r
 Icon
 
@@ -40,6 +40,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+static/
 eggs/
 lib/
 lib64/
