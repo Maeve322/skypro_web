@@ -1,0 +1,30 @@
+{% extends './base.html' %}
+{% load media_filter %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            {% if object.preview %}
+              <img src="{{ object.preview | media_filter }}">
+            {% endif %}
+            <div class="card-body">
+              <p class="card-text">Заголовок: {{ object.title }}</p>
+              <p class="card-text">Содержимое: {{ object.content }}</p>
+              <p class="card-text">Дата создания: {{ object.created_at }}</p>
+              <p class="card-text">Опубликовано или нет: {{ object.is_published }}</p>
+              <p class="card-text">Кол-во просмотров: {{ object.view_count }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a class="btn btn-primary" href="{% url 'blog:blogpost_list' %}" role="button">Назад</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

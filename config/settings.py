@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +8,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ""
+SECRET_KEY = (
+    "django-insecure-lsj$7kqax(4qt(h%s+pg709+$17y=ccl1hsew82rpeg!xxw8qa"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "catalog",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -68,9 +70,9 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "HOST": "127.0.0.1",
         "PORT": "5432",
-        "NAME": "",
-        "USER": "",
-        "PASSWORD": "",
+        "NAME": "postgres",
+        "USER": "jasey",
+        "PASSWORD": "jasey",
     }
 }
 

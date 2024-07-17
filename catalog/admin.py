@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, ContactsView
+from .models import Category, Product, Contacts
 
 # Register your models here.
 
@@ -22,4 +22,4 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(ContactsView)
+admin.site.register(Contacts)

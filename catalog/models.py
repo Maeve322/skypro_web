@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class ContactsView(models.Model):
+class Contacts(models.Model):
     name = models.CharField(max_length=100, verbose_name="Имя")
     address = models.CharField(max_length=250, verbose_name="Адрес")
     phone = models.CharField(max_length=100, verbose_name="Телефон")
