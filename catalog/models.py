@@ -56,3 +56,29 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+
+class Version(models.Model):
+    """Модель для версии продукта"""
+
+    product = models.ForeignKey(
+        Product,
+        related_name="versions",
+        verbose_name="Продукт",
+        on_delete=models.CASCADE,
+    )
+    number = models.PositiveIntegerField(
+        verbose_name=" Номер версии", blank=True, null=True
+    )
+    name = models.CharField(max_length=150, verbose_name="Название версии")
+    is_current = models.BooleanField(
+        default=True, verbose_name="Признак актуальности"
+    )
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name

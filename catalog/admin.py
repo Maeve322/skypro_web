@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Contacts
+from .models import Category, Product, Contacts, Version
 
 # Register your models here.
 
@@ -20,6 +20,15 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
         "description",
     )
+
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    """Класс для регистрации версии в админке."""
+
+    list_display = ("id", "product", "name", "number", "is_current")
+    list_filter = ("product",)
+    search_fields = ("name",)
 
 
 admin.site.register(Contacts)
