@@ -22,6 +22,8 @@
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                             {{product.description|truncatechars:100}}
                         </ul>
+                            <p>Active version: {{ product.active}}</p>
+                        
                         <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-lg btn-block btn-outline-primary">Купить</a>
                     </div>
                 </div>
@@ -31,14 +33,16 @@
     </div>
     <div class="pagination">
         <span class="page-links">
-            {% if page_obj.has_previous %}
-                <a href="{% url 'catalog:product_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
-            {% endif %}
-            <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            </span>
-            {% if page_obj.has_next %}
-                <a href="{% url 'catalog:product_list' %}?page={{ page_obj.next_page_number }}">next</a>
+            {% if is_paginated %}
+                {% if page_obj.has_previous %}
+                    <a href="{% url 'catalog:product_list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="{% url 'catalog:product_list' %}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
             {% endif %}
         </span>
     </div>

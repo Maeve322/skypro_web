@@ -8,6 +8,7 @@ from django.views.generic import (
     CreateView,
     TemplateView,
     UpdateView,
+    ListView,
 )
 from django.forms import inlineformset_factory
 from catalog.models import Category, Product, Contacts, Version
@@ -41,20 +42,25 @@ class ContactPageView(TemplateView):
         return self.get(request, *args, **kwargs)
 
 
-class HomePageView(TemplateView):
+class HomePageView(ListView):
+    model = Product
     template_name = "catalog/home.html"
+    paginate_by = 3
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        products = Product.objects.all().order_by("id")
-        paginator = Paginator(products, 3)  # 3 products per page
-        page_number = self.request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
-        context["page_obj"] = page_obj
-        return context
+    def get_queryset(self):
+        products = super().get_queryset()
+        for product in products:
+            active_versions = Version.objects.filter(
+                product=product, is_current=True
+            )
+            if active_versions:
+                product.active = active_versions.last().name
+            else:
+                product.active = "Отсутствует"
+        return products
 
 
-class ProdcutDetailView(DetailView):
+class ProductDetailView(DetailView):
     model = Product
     template_name = "catalog/product_detail.html"
 
