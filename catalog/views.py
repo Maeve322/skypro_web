@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.core.validators import ValidationError
 from django.http import JsonResponse
@@ -65,44 +66,31 @@ class ProductDetailView(DetailView):
     template_name = "catalog/product_detail.html"
 
 
-class CreateProductView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+
+    login_url = (
+        "users:login"  # URL для перенаправления неавторизованных пользователей
+    )
+    redirect_field_name = "redirect_to"  # имя параметра для хранения URL, на который нужно перенаправить пользователя после авторизации
+
     form_class = CreateProduct
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:products_list")
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        VersionFormset = inlineformset_factory(
-            Product, Version, form=VersionForm, extra=1
-        )
-
-        if self.request.method == "POST":
-            context_data["formset"] = VersionFormset(self.request.POST)
-
-        else:
-            context_data["formset"] = VersionFormset()
-
-        return context_data
-
     def form_valid(self, form):
-        """Метод для проверки валидации формы и формсета"""
-        context_data = self.get_context_data()
-        formset = context_data["formset"]
-        # Задаем условие, при котором д.б. валидными и форма и формсет
-        if form.is_valid() and formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            # save() данная функция сохраняет внесенные изменения
-            formset.save()
-            return super().form_valid(form)
-
-        else:
-            return self.render_to_response(
-                self.get_context_data(form=form, formset=formset)
-            )
+        product = form.save()
+        product.owner = self.request.user
+        product.save()
+        return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+
+    login_url = (
+        "users:login"  # URL для перенаправления неавторизованных пользователей
+    )
+    redirect_field_name = "redirect_to"  # имя параметра для хранения URL, на который нужно перенаправить пользователя после авторизации
+
     model = Product
     template_name = "catalog/product_form.html"
     form_class = CreateProduct
