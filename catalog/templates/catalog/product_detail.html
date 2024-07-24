@@ -13,7 +13,14 @@
                     <p>{{ product.description }}</p>
                     <p>Price: {{ product.price }} $</p>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Buy</button>
-                    <a href="{% url 'catalog:update_product' product.pk %}">Edit</a>
+                    {% if user.is_authenticated %}
+                    {% if perms.catalog.can_change_product_description and perms.catalog.can_change_product_category or user == product.owner %}
+                        <a class="btn btn-primary my-2" href="{% url 'catalog:update_product' product.pk %}" role="button">Изменить</a>
+                    {% endif %}    
+                    {% if user == product.owner %}
+                        <a class="btn btn-danger my-2" href="{% url 'catalog:delete_product' product.pk %}" role="button">Удалить</a>
+                    {% endif %}    
+                {% endif %}
                 </div>    
             </div>
         </div>

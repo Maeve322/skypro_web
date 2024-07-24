@@ -13,6 +13,7 @@
             {% if user.is_authenticated %}
               <li><a href="{% url 'users:profile' %}" class="text-white">{{user.email}}</a></li>
               <li><a href="{% url 'users:logout' %}" class="text-white">Выйти</a></li>
+              <li><a href="{% url 'catalog:create_product' %}" class="text-white">Создать продукт</a></li>
             {% else %}
               <li><a href="{% url 'users:login' %}" class="text-white">Войти</a></li>
               <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>

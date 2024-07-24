@@ -10,6 +10,7 @@ from django.views.generic import (
     TemplateView,
     UpdateView,
     ListView,
+    DeleteView,
 )
 from django.forms import inlineformset_factory
 from catalog.models import Category, Product, Contacts, Version
@@ -75,7 +76,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     form_class = CreateProduct
     template_name = "catalog/product_form.html"
-    success_url = reverse_lazy("catalog:products_list")
+    success_url = reverse_lazy("catalog:product_list")
 
     def form_valid(self, form):
         product = form.save()
@@ -147,3 +148,9 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return self.render_to_response(
                 self.get_context_data(form=form, formset=formset)
             )
+
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    model = Product
+    template_name = "catalog/product_confirm_delete.html"
+    success_url = reverse_lazy("catalog:product_list")

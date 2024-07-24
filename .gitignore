@@ -40,7 +40,7 @@ build/
 develop-eggs/
 dist/
 downloads/
-static/
+static/admin/
 eggs/
 lib/
 lib64/
