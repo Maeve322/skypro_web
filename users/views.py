@@ -5,9 +5,10 @@ import secrets
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.views import LoginView
+from django.views.generic import CreateView, UpdateView, RedirectView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
@@ -108,3 +109,13 @@ class ProfileView(UpdateView):
 
     def get_object(self, queryset: QuerySet[any] | None = ...) -> Model:
         return self.request.user
+
+
+class CustomLogoutView(LoginRequiredMixin, RedirectView):
+    url = reverse_lazy("users:login")
+
+    def get(self, request, *args, **kwargs):
+        from django.contrib.auth import logout
+
+        logout(request)
+        return super().get(request, *args, **kwargs)
