@@ -56,6 +56,9 @@ class Product(models.Model):
         related_name="products",
         **NULLABLE,
     )
+    is_published = models.BooleanField(
+        default=False, verbose_name="Признак публикации"
+    )
 
     # manufactured_at = models.DateField(null=True, blank=True)
     def __str__(self) -> str:
@@ -65,6 +68,11 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+        permissions = (
+            ("set_published", "Can cancel publication of a product"),
+            ("change_description", "Can change description"),
+            ("change_category", "Can change category"),
+        )
 
 
 class Version(models.Model):

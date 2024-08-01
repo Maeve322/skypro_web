@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.core.validators import ValidationError
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
+
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.views.generic import (
@@ -14,7 +15,7 @@ from django.views.generic import (
 )
 from django.forms import inlineformset_factory
 from catalog.models import Category, Product, Contacts, Version
-from .forms import CreateProduct, VersionForm
+from .forms import CreateProduct, VersionForm, ProductModeratorForm
 
 # Create your views here.
 
@@ -95,6 +96,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     template_name = "catalog/product_form.html"
     form_class = CreateProduct
+
+    def get_form_class(self):
+        user = self.request.user
+        perms = (
+            "catalog.set_published",
+            "catalog.change_description",
+            "catalog.change_category",
+        )
+        if user.has_perms(perms):
+            return ProductModeratorForm
+
+        raise HttpResponseForbidden
 
     def get_success_url(self):
         """Метод для определения пути, куда будет совершен переход после редактирования продкута"""
