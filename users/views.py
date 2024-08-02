@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, RedirectView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
@@ -84,7 +84,7 @@ def password_reset_request(request):
                         request,
                         f"Новый пароль отправлен на почтовый ящик {EMAIL_HOST_USER}",
                     )
-                except Exception as e:
+                except Exception:
                     messages.error(
                         request,
                         "Ошибка при отправке письма. Попробуйте еще раз.",

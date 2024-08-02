@@ -1,4 +1,3 @@
-from django.db.models.query import QuerySet
 from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 from django.views.generic import (

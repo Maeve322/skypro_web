@@ -1,10 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.core.validators import ValidationError
 from django.http import JsonResponse, HttpResponseForbidden
-
 from django.urls import reverse_lazy
-from django.core.paginator import Paginator
 from django.views.generic import (
     DetailView,
     CreateView,
@@ -14,7 +10,7 @@ from django.views.generic import (
     DeleteView,
 )
 from django.forms import inlineformset_factory
-from catalog.models import Category, Product, Contacts, Version
+from catalog.models import Product, Contacts, Version
 from .forms import CreateProduct, VersionForm, ProductModeratorForm
 
 # Create your views here.

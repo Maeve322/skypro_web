@@ -1,0 +1,23 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$TyRLEvYoR8A7HUTkKkZHwF$FE9oEtObW43/NANMMCNC5dtbS81+x1ribg3/RbaMk8k=",
+      "last_login": "2024-08-01T12:35:32Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-07-22T16:49:56Z",
+      "email": "ivc@yandex.ru",
+      "phone": null,
+      "country": null,
+      "avatar": "",
+      "token": null,
+      "groups": [3],
+      "user_permissions": []
+    }
+  }
+]

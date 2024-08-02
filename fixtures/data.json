@@ -2,7 +2,7 @@
   {
     "model": "catalog.contacts",
     "pk": 1,
-    "fields": { "name": "Jasey", "address": "Monhattan", "phone": "+3144567" }
+    "fields": { "name": "123", "address": "23213", "phone": "2312" }
   },
   {
     "model": "catalog.category",
@@ -10,7 +10,7 @@
     "fields": {
       "name": "Plugins",
       "description": "Plugins for web ads",
-      "created_at": "2024-07-13T13:52:04.882Z"
+      "created_at": "2024-07-22T16:45:50.113Z"
     }
   },
   {
@@ -21,9 +21,11 @@
       "description": "- Неограниченная лицензия\r\n- Поддержка\r\n- Установка на сервер\r\n- Получение обновлений",
       "imagePreview": "products/preview/slot_items.jpg",
       "category": 1,
-      "created_at": "2024-07-13T13:52:30.086Z",
-      "updated_at": "2024-07-21T18:15:26.713Z",
-      "price": "140.00"
+      "created_at": "2024-07-22T16:45:50.117Z",
+      "updated_at": "2024-08-01T12:53:00.536Z",
+      "price": "140.00",
+      "owner": 1,
+      "is_published": true
     }
   },
   {
@@ -34,9 +36,11 @@
       "description": "Awesome Screenshot is the highest-rated screen capture & screen recorder tool with over 2 million users! Screen sharing, fast and easy!",
       "imagePreview": "",
       "category": 1,
-      "created_at": "2024-07-13T15:26:14.593Z",
-      "updated_at": "2024-07-21T18:11:30.742Z",
-      "price": "33.00"
+      "created_at": "2024-07-22T16:45:50.121Z",
+      "updated_at": "2024-08-01T12:53:05.190Z",
+      "price": "33.00",
+      "owner": 1,
+      "is_published": true
     }
   },
   {
@@ -47,42 +51,31 @@
       "description": "extensoin for delete ads from web site",
       "imagePreview": "products/preview/pixlr-image-generator-f216b7b7-cfe9-4d1b-8640-03f685ae9aa1-Photoroom.pn_COM9Khj.png",
       "category": 1,
-      "created_at": "2024-07-13T15:46:03.187Z",
-      "updated_at": "2024-07-21T18:16:42.475Z",
-      "price": "8.00"
+      "created_at": "2024-07-22T16:45:50.123Z",
+      "updated_at": "2024-08-01T12:52:23.340Z",
+      "price": "8.00",
+      "owner": 1,
+      "is_published": false
     }
   },
   {
     "model": "catalog.product",
-    "pk": 4,
+    "pk": 10,
     "fields": {
-      "name": "ahahah",
-      "description": "Test app",
+      "name": "111",
+      "description": "111",
       "imagePreview": "",
       "category": 1,
-      "created_at": "2024-07-17T16:28:27.522Z",
-      "updated_at": "2024-07-21T18:17:03.731Z",
-      "price": "0.00"
+      "created_at": "2024-07-24T12:20:06.393Z",
+      "updated_at": "2024-08-01T12:52:46.454Z",
+      "price": "111.00",
+      "owner": 1,
+      "is_published": false
     }
   },
   {
     "model": "catalog.version",
-    "pk": 12,
-    "fields": { "product": 1, "number": 1, "name": "1.0.0", "is_current": true }
-  },
-  {
-    "model": "catalog.version",
-    "pk": 13,
-    "fields": { "product": 3, "number": 1, "name": "2.0.2", "is_current": true }
-  },
-  {
-    "model": "catalog.version",
-    "pk": 14,
-    "fields": {
-      "product": 4,
-      "number": 1,
-      "name": "Beta test",
-      "is_current": true
-    }
+    "pk": 2,
+    "fields": { "product": 2, "number": 1, "name": "1", "is_current": true }
   }
 ]
