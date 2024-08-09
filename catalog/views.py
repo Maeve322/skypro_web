@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
+from django.core.cache import cache
 from django.views.generic import (
     DetailView,
     CreateView,
