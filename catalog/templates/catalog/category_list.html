@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Категории</h1>
+    <p class="lead">Категории - список доступных категорий для продуктов</p>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-4 mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-header">{{ object }}</h4>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

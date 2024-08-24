@@ -11,10 +11,9 @@ from django.views.generic import (
     DeleteView,
 )
 from django.forms import inlineformset_factory
-from catalog.models import Product, Contacts, Version
+from catalog.models import Product, Contacts, Version, Category
 from .forms import CreateProduct, VersionForm, ProductModeratorForm
-
-# Create your views here.
+from catalog.service import get_categories_from_cache, get_products_from_cache
 
 
 class ContactPageView(TemplateView):
@@ -48,7 +47,7 @@ class HomePageView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        products = super().get_queryset()
+        products = get_products_from_cache()
         for product in products:
             active_versions = Version.objects.filter(
                 product=product, is_current=True
@@ -164,3 +163,10 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:product_list")
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_queryset(self):
+        return get_categories_from_cache()
